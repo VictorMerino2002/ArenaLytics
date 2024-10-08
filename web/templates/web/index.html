@@ -1,0 +1,31 @@
+{% extends "web/base.html" %}
+
+{% block link %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'web/css/index.css' %}">
+{% endblock link %}
+
+{% block title %}ArenaLytics{% endblock title %}
+
+{% block content %}
+    <section class="header">
+        {% load static %}
+        <img class="main-logo" src="{% static 'web/img/logo.png' %}" alt="">
+
+        <div class="main-champion-search-container">
+            <div class="champion-search-input-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="main-champion-input" type="text" placeholder="Search for a champion">
+            </div>
+        </div>
+    </section>
+
+    <section class="champions-container" id="champions-container">
+        {% for champion in champions %}
+            <a href="champion/{{champion.name}}">
+                <img src="https://opgg-static.akamaized.net/meta/images/lol/latest/champion/{{champion.name}}.png?image=e_upscale,c_crop,h_103,w_103,x_9,y_9/q_auto:good,f_webp,w_160,h_160&v=1724034092925" alt="{{champion.name}}">
+                <span>{{champion.name|capfirst}}</span>
+            </a>
+        {% endfor %}
+    </section>
+{% endblock content%}

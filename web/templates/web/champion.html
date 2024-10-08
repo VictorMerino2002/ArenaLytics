@@ -1,0 +1,135 @@
+{% extends "web/base.html" %}
+
+{% block link %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'web/css/champion.css' %}">
+    <script src="{% static 'web/js/championStats.js' %}" defer></script>
+{% endblock link %}
+
+{% block title %}ArenaLytics {{champion.name|capfirst}}{% endblock title %}
+
+{% block content%}
+
+<header class="tier-{{tier}}">
+    <img src="https://opgg-static.akamaized.net/meta/images/lol/latest/champion/{{champion.name}}.png?image=e_upscale,c_crop,h_103,w_103,x_9,y_9/q_auto:good,f_webp,w_160,h_160&v=1724034092925" alt="{{ champion.name }}">  
+    <h1>{{champion.name|capfirst}}</h1>
+</header>
+
+<section class="champion-stats">
+    <b>Win rate : {{champion.winrate}}</b>
+    <b>Games : {{champion.games}}</b>
+    <b>Tier : <span class="tier-{{tier}}">{{tier|upper}}</span></b>
+</section>
+
+
+<main>
+
+    <section class="augments">
+        <h2>Prismatic augments</h2>
+        <div class="best-augments">
+            {% for augment in augments.prismatics|slice:":4" %}
+                <div class="augment">
+                    <img class="aug-border" src="https://raw.communitydragon.org/14.17/game/assets/ux/cherry/augments/augmentselection/augmentcard_frame_prismatic.png" alt="">
+                    <img class="aug-img" src="https://raw.communitydragon.org/{{game_version|slice:":5"}}/game/assets/ux/cherry/augments/icons/{{augment.api_name}}" alt="">
+                    <span>{{augment.name}}</span>
+                    <small>{{augment.winrate}}</small>
+                </div>
+            {% endfor %}
+        </div>
+        
+
+        <h2>Gold augments</h2>
+        <div class="best-augments">
+            {% for augment in augments.gold|slice:":4" %}
+                <div class="augment">
+                    <img class="aug-border" src="https://raw.communitydragon.org/14.17/game/assets/ux/cherry/augments/augmentselection/augmentcard_frame_gold.png" alt="">
+                    <img class="aug-img" src="https://raw.communitydragon.org/{{game_version|slice:":5"}}/game/assets/ux/cherry/augments/icons/{{augment.api_name}}" alt="">
+                    <span>{{augment.name}}</span>
+                    <small>{{augment.winrate}}</small>
+                </div>
+            {% endfor %}
+        </div>
+
+        <h2>Silver augments</h2>
+        <div class="best-augments">
+            {% for augment in augments.silver|slice:":4" %}
+                <div class="augment">
+                    <img class="aug-border" src="https://raw.communitydragon.org/14.17/game/assets/ux/cherry/augments/augmentselection/augmentcard_frame_silver.png" alt="">
+                    <img class="aug-img" src="https://raw.communitydragon.org/{{game_version|slice:":5"}}/game/assets/ux/cherry/augments/icons/{{augment.api_name}}" alt="">
+                    <span>{{augment.name}}</span>
+                    <small>{{augment.winrate}}</small>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+    <section class="items">
+        <h2>Items</h2>
+        <div class="items-img-container build">
+            <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{initial_items.0.code}}.png" alt="">
+            <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{boots.0.code}}.png" alt="">
+            <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{items_sets.0.item1}}.png" alt="">
+            <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{prismatics.0.code}}.png" alt="">  
+            <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{items_sets.0.item2}}.png" alt="">
+            <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{items_sets.0.item3}}.png" alt="">
+            <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{items_sets.0.item4}}.png" alt="">
+        </div>
+    
+        <div id="more-items">
+            {% for item in items_sets|slice:"1:" %}
+            <div class="build">
+                <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{initial_items.0.code}}.png" alt="">
+                <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{boots.0.code}}.png" alt="">
+                <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{item.item1}}.png" alt="">
+                <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{prismatics.0.code}}.png" alt="">
+                <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{item.item2}}.png" alt="">
+                <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{item.item3}}.png" alt="">
+                <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{item.item4}}.png" alt="">
+            </div>
+            {% endfor %}
+        </div>
+    
+        <button id="more-items-btn"><i class="fa-solid fa-chevron-down"></i></button>
+    
+    
+        
+    </section>
+
+    <section class="boots">
+        <h2>Boots</h2>
+        <div class="items-img-container build">
+            {% for boot in boots %}
+            <div class="item">
+                <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{boot.code}}.png" alt="">
+                <span>{{boot.winrate}}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="initial-items">
+        <h2>Initaial Items</h2>
+        <div class="items-img-container build">
+            {% for item in initial_items %}
+                <div class="item">
+                    <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{item.code}}.png" alt="">
+                    <span>{{item.winrate}}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="prismatics">
+        <h2>Prismatics</h2>
+        <div class="items-img-container build">
+            {% for item in prismatics %}
+            <div class="item">
+                <img src="https://ddragon.leagueoflegends.com/cdn/{{game_version}}/img/item/{{item.code}}.png" alt="">
+                <span>{{item.winrate}}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+
+{% endblock content%}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'web/css/base.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'web/img/icon.png' %}">
+    {% block link %} {%endblock link %}
+    <script src="https://kit.fontawesome.com/f865c48659.js" crossorigin="anonymous"></script>
+    <script src="{% static 'web/js/championSearch.js' %}" defer></script>
+    <title>{% block title %} {% endblock title %}</title>
+</head>
+<body>
+    <nav class="nav-bar">
+        <a href="/">Home</a>
+        <a href="/ranking">Ranking</a>
+        <div class="champion-search-container">
+            <div class="champion-search-input-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="champion-search-input" type="text" placeholder="Search for a champion">
+            </div>
+            <div id="champion-search">
+
+            </div>
+        </div>
+    </nav>
+    {% block content %}{% endblock content %}
+
+    <script>
+        const champions = {{ champions|safe }}
+        const champSearchInput = document.getElementById("champion-search-input")
+        const champItemcontainer = document.getElementById("champion-search")
+
+        champSearchInput.addEventListener("input", ()=> {
+            champItemcontainer.innerHTML = ""
+            const searchValue = champSearchInput.value.toLowerCase()
+            const filtredChamps = searchValue === ""
+            ? []
+            : champions.filter(champ => champ.name.toLowerCase().startsWith(searchValue))
+            
+            for (let i = 0; i< Math.min(7,filtredChamps.length); i++) {
+                addChampionToSearch(filtredChamps[i].name, champItemcontainer)
+            }
+        })
+    </script>
+</body>
+</html>

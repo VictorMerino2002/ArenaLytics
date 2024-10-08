@@ -1,0 +1,123 @@
+:root {
+    --main : #9136e7;
+    --main-light: #c79ee8; 
+    --white01 : #a3a3a3;
+    --gray01 : #39313c;
+    --gray02 : #2f2830;
+    --gray03 : #1f1d1c;
+    
+    --tier-d01: #a88a67;
+    --tier-d02: #3a2f23;
+    --tier-c01 : #9aa4af;
+    --tier-c02 : #383c3f;
+    --tier-b01 : #ffb900;
+    --tier-b02 : #463811;
+    --tier-a01 : #00bba3;
+    --tier-a02 : #093f38;
+    --tier-s01 : #b62929;
+    --tier-s02 : #330303;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: __Roboto_5b92f9, __Roboto_Fallback_5b92f9, sans-serif, system-ui, sans-serif;
+}
+
+body {
+    background: var(--gray03);
+}
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    height: 50px;
+    width: 100%;
+    background: var(--main);
+    padding: 0 50px;
+
+    a {
+        color: var(--main-light);
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #fff;
+    }
+}
+
+.champion-search-input-container {
+    background: #fff;
+    border-radius: .3em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+    height: 30px;
+
+    i {
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        color: var(--main);
+    }
+
+    input {
+        padding: 12px;
+        border: none;
+        background: none;
+        width: 100%;
+        color: #000;
+    }
+
+    input:focus {
+        outline: none;
+    }
+}
+
+#champion-search {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    width: 250px;
+
+    a {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        height: 50px;
+        padding: 0 5px;
+        background: var(--gray02);
+        color: var(--white01);
+        border: 1px solid var(--gray03);
+
+        img {
+            height: 80%;
+            border-radius: 50%;
+        }
+    }
+
+    :last-child {
+        border-radius: 0 0 .4em .4em;
+    }
+
+    a:hover {
+        background: var(--gray03);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .nav-bar {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .champion-search-input-container {
+        width: 100%;
+    }
+}

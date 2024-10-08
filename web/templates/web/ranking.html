@@ -1,0 +1,74 @@
+{% extends "web/base.html" %}
+
+{% block link %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'web/css/index.css' %}">
+{% endblock link %}
+
+{% block title %}ArenaLytics{% endblock title %}
+
+{% block content %}
+<section class="header">
+    {% load static %}
+    <img class="main-logo" src="{% static 'web/img/logo.png' %}" alt="">
+
+    <div class="main-champion-search-container">
+    </div>
+</section>
+
+    <section class="champions-container" id="champions-container">
+        <h2 class="tier-s">S Tier</h2>
+        <div class="tier-list" id="tier-s">
+            {% for champion in champions_tier.s %}
+                <a href="champion/{{champion.name}}">
+                    <img src="https://opgg-static.akamaized.net/meta/images/lol/latest/champion/{{champion.name}}.png?image=e_upscale,c_crop,h_103,w_103,x_9,y_9/q_auto:good,f_webp,w_160,h_160&v=1724034092925" alt="{{champion.name}}">
+                    <span>{{champion.name|capfirst}}</span>
+                </a>
+            {% endfor %}
+        </div>
+
+
+        <h2 class="tier-a">A Tier</h2>
+        <div class="tier-list" id="tiers-a"></div>
+            {% for champion in champions_tier.a %}
+                <a href="champion/{{champion.name}}">
+                    <img src="https://opgg-static.akamaized.net/meta/images/lol/latest/champion/{{champion.name}}.png?image=e_upscale,c_crop,h_103,w_103,x_9,y_9/q_auto:good,f_webp,w_160,h_160&v=1724034092925" alt="{{champion.name}}">
+                    <span>{{champion.name|capfirst}}</span>
+                </a>
+            {% endfor %}
+
+
+        <h2 class="tier-b">B Tier</h2>
+        <div class="tier-list" id="tiers-b">
+            {% for champion in champions_tier.b %}
+                <a href="champion/{{champion.name}}">
+                    <img src="https://opgg-static.akamaized.net/meta/images/lol/latest/champion/{{champion.name}}.png?image=e_upscale,c_crop,h_103,w_103,x_9,y_9/q_auto:good,f_webp,w_160,h_160&v=1724034092925" alt="{{champion.name}}">
+                    <span>{{champion.name|capfirst}}</span>
+                </a>
+            {% endfor %}
+        </div>
+
+
+        <h2 class="tier-c">C Tier</h2>
+        <div class="tier-list" id="tiers-c">
+            {% for champion in champions_tier.c %}
+                <a href="champion/{{champion.name}}">
+                    <img src="https://opgg-static.akamaized.net/meta/images/lol/latest/champion/{{champion.name}}.png?image=e_upscale,c_crop,h_103,w_103,x_9,y_9/q_auto:good,f_webp,w_160,h_160&v=1724034092925" alt="{{champion.name}}">
+                    <span>{{champion.name|capfirst}}</span>
+                </a>
+            {% endfor %}
+        </div>
+
+
+        <h2 class="tier-d">D Tier</h2>
+        <div class="tier-list" id="tiers-d">
+            {% for champion in champions_tier.d %}
+                <a href="champion/{{champion.name}}">
+                    <img src="https://opgg-static.akamaized.net/meta/images/lol/latest/champion/{{champion.name}}.png?image=e_upscale,c_crop,h_103,w_103,x_9,y_9/q_auto:good,f_webp,w_160,h_160&v=1724034092925" alt="{{champion.name}}">
+                    <span>{{champion.name|capfirst}}</span>
+                </a>
+            {% endfor %}
+        </div>
+
+    </section>
+{% endblock content%}
